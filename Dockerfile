@@ -65,14 +65,16 @@ WORKDIR /app/web
 COPY --from=web-build /build/web/package*.json ./
 COPY --from=web-build /build/web/node_modules ./node_modules
 COPY --from=web-build /build/web/.next ./.next
-COPY --from=web-build /build/web/public ./public
+# Copy public folder only if it exists
+COPY --from=web-build /build/web/public* ./public/
 
 # 3. Admin runtime
 WORKDIR /app/admin
 COPY --from=admin-build /build/admin/package*.json ./
 COPY --from=admin-build /build/admin/node_modules ./node_modules
 COPY --from=admin-build /build/admin/.next ./.next
-COPY --from=admin-build /build/admin/public ./public
+# Copy public folder only if it exists (using wildcard to avoid crash if missing)
+COPY --from=admin-build /build/admin/public* ./public/
 
 # Reverse Proxy Config
 COPY nginx.conf /etc/nginx/nginx.conf.template
@@ -82,6 +84,7 @@ RUN mkdir -p /var/log/supervisor
 COPY <<'EOF' /etc/supervisord.conf
 [supervisord]
 nodaemon=true
+user=root
 logfile=/var/log/supervisor/supervisord.log
 
 [program:api]
@@ -91,6 +94,7 @@ stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
 stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
+autorestart=true
 
 [program:web]
 command=npm start
@@ -99,6 +103,7 @@ stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
 stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
+autorestart=true
 
 [program:admin]
 command=npm start
@@ -107,6 +112,7 @@ stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
 stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
+autorestart=true
 
 [program:nginx]
 command=nginx -g "daemon off;"
@@ -114,6 +120,7 @@ stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
 stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
+autorestart=true
 EOF
 
 # Startup script to bridge Render Environment to App Environment
@@ -124,25 +131,28 @@ export NGINX_PORT=${PORT:-80}
 envsubst '${NGINX_PORT}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
 # --- GENERATE .env FOR API ---
-echo "NODE_ENV=${NODE_ENV}" > /app/api/.env
-echo "PORT=3000" >> /app/api/.env
-echo "DATABASE_URL=${DATABASE_URL}" >> /app/api/.env
-echo "JWT_SECRET=${JWT_SECRET}" >> /app/api/.env
-echo "JWT_EXPIRES_IN=${JWT_EXPIRES_IN}" >> /app/api/.env
-echo "JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}" >> /app/api/.env
-echo "JWT_REFRESH_EXPIRES_IN=${JWT_REFRESH_EXPIRES_IN}" >> /app/api/.env
-echo "RAZORPAY_KEY_ID=${RAZORPAY_KEY_ID}" >> /app/api/.env
-echo "RAZORPAY_KEY_SECRET=${RAZORPAY_KEY_SECRET}" >> /app/api/.env
-echo "IMAGEKIT_URL_ENDPOINT=${IMAGEKIT_URL_ENDPOINT}" >> /app/api/.env
-echo "IMAGEKIT_PUBLIC_KEY=${IMAGEKIT_PUBLIC_KEY}" >> /app/api/.env
-echo "IMAGEKIT_PRIVATE_KEY=${IMAGEKIT_PRIVATE_KEY}" >> /app/api/.env
-echo "IMAGEKIT_BASE_FOLDER=${IMAGEKIT_BASE_FOLDER}" >> /app/api/.env
-echo "SHIPROCKET_EMAIL=${SHIPROCKET_EMAIL}" >> /app/api/.env
-echo "SHIPROCKET_PASSWORD=${SHIPROCKET_PASSWORD}" >> /app/api/.env
-echo "SHIPROCKET_BASE_URL=${SHIPROCKET_BASE_URL}" >> /app/api/.env
-echo "ALLOWED_ORIGINS=${ALLOWED_ORIGINS}" >> /app/api/.env
-echo "RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS}" >> /app/api/.env
-echo "RATE_LIMIT_MAX=${RATE_LIMIT_MAX}" >> /app/api/.env
+# In production on Render, these variables are provided by the platform.
+cat <<ENV > /app/api/.env
+NODE_ENV=${NODE_ENV:-production}
+PORT=3000
+DATABASE_URL=${DATABASE_URL}
+JWT_SECRET=${JWT_SECRET}
+JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-7d}
+JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+JWT_REFRESH_EXPIRES_IN=${JWT_REFRESH_EXPIRES_IN:-30d}
+RAZORPAY_KEY_ID=${RAZORPAY_KEY_ID}
+RAZORPAY_KEY_SECRET=${RAZORPAY_KEY_SECRET}
+IMAGEKIT_URL_ENDPOINT=${IMAGEKIT_URL_ENDPOINT}
+IMAGEKIT_PUBLIC_KEY=${IMAGEKIT_PUBLIC_KEY}
+IMAGEKIT_PRIVATE_KEY=${IMAGEKIT_PRIVATE_KEY}
+IMAGEKIT_BASE_FOLDER=${IMAGEKIT_BASE_FOLDER}
+SHIPROCKET_EMAIL=${SHIPROCKET_EMAIL}
+SHIPROCKET_PASSWORD=${SHIPROCKET_PASSWORD}
+SHIPROCKET_BASE_URL=${SHIPROCKET_BASE_URL}
+ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
+RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS:-900000}
+RATE_LIMIT_MAX=${RATE_LIMIT_MAX:-100}
+ENV
 
 # --- GENERATE .env FOR WEB ---
 echo "NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}" > /app/web/.env
@@ -151,6 +161,7 @@ echo "NEXT_PUBLIC_RAZORPAY_KEY_ID=${NEXT_PUBLIC_RAZORPAY_KEY_ID}" >> /app/web/.e
 # --- GENERATE .env FOR ADMIN ---
 echo "NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}" > /app/admin/.env
 
+# Start Supervisor
 exec supervisord -c /etc/supervisord.conf
 SCRIPT
 RUN chmod +x /app/start.sh
