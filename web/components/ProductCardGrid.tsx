@@ -34,13 +34,17 @@ export default function ProductCardGrid({
   return (
     <>
       <div className={styles.productGrid}>
-        {products.map((prod) => (
-          <div key={prod.id} className={styles.productCard}>
+        {products.map((prod, index) => (
+          <div 
+            key={prod.id} 
+            className={`${styles.productCard} animate-fade-in-up`}
+            style={{ animationDelay: `${(index % 8) * 0.1}s` }}
+          >
             <Link
               href={`/products/${prod.id}`}
               className={styles.productLink}
             >
-              <div className={styles.productImageWrap}>
+              <div className={`${styles.productImageWrap} card-hover`}>
                 {prod.images[0] ? (
                   <img
                     src={prod.images[0].url}

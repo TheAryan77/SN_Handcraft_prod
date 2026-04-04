@@ -32,20 +32,20 @@ export default async function WishlistPage() {
 
   return (
     <>
-      <section className={styles.pageHeader}>
+      <section className={`${styles.pageHeader} animate-fade-in`}>
         <div className="mandala-bg" style={{ opacity: 0.1 }}></div>
-        <h1 className={styles.pageTitle}>My Wishlist</h1>
-        <p className={styles.pageSubtitle}>Treasures you saved for later.</p>
+        <h1 className={`${styles.pageTitle} animate-fade-in-down`}>My Wishlist</h1>
+        <p className={`${styles.pageSubtitle} animate-fade-in-up delay-1`}>Treasures you saved for later.</p>
       </section>
 
       <section
-        className={styles.pageContent}
+        className={`${styles.pageContent} animate-fade-in`}
         style={{ backgroundColor: "var(--background-color)", minHeight: "50vh" }}
       >
         <div className="pattern2-bg"></div>
         <div className="container">
           {items.length === 0 ? (
-            <div className={styles.card} style={{ textAlign: "center" }}>
+            <div className={`${styles.card} animate-scale-in delay-2`} style={{ textAlign: "center" }}>
               <h2 className={styles.cardTitle}>Wishlist is empty</h2>
               <p style={{ color: "var(--text-muted)", marginBottom: "1rem" }}>
                 Save products from the catalog and they will appear here.
@@ -56,24 +56,32 @@ export default async function WishlistPage() {
             </div>
           ) : (
             <div className={styles.grid}>
-              {items.map((item: any) => (
-                <div key={item.id} className={styles.productCard}>
+              {items.map((item: any, index: number) => (
+                <div 
+                  key={item.id} 
+                  className={`${styles.productCard} animate-fade-in-up`}
+                  style={{ animationDelay: `${(index % 8) * 0.1 + 0.2}s` }}
+                >
                   <Link href={`/products/${item.product.id}`}>
                     <div
-                      className={styles.productImage}
+                      className={`${styles.productImage} card-hover`}
                       style={{
                         backgroundColor: "var(--linen)",
-                        backgroundImage: item.product.images[0]
+                        backgroundImage: item.product.images?.[0]
                           ? `url(${item.product.images[0].url})`
                           : "none",
                         backgroundSize: "cover",
                         backgroundPosition: "center",
+                        borderRadius: "var(--radius-md)",
+                        height: "240px",
                       }}
                     ></div>
-                    <h3 className={styles.productName}>{item.product.name}</h3>
-                    <p className={styles.productPrice}>
-                      ₹{Number(item.product.price).toLocaleString()}
-                    </p>
+                    <div style={{ padding: "1rem 0" }}>
+                      <h3 className={styles.productName}>{item.product.name}</h3>
+                      <p className={styles.productPrice}>
+                        ₹{Number(item.product.price).toLocaleString()}
+                      </p>
+                    </div>
                   </Link>
                   <WishlistItemActions productId={item.product.id} />
                 </div>

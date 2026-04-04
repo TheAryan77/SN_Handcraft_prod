@@ -126,22 +126,22 @@ export default async function Home() {
           <div className={styles.heroOverlay} />
         </div>
         <div className="pattern-blockprint" />
-        <div className={styles.heroContent}>
-          <div className={styles.heroTag}>
+        <div className={`${styles.heroContent} animate-fade-in`}>
+          <div className={`${styles.heroTag} animate-fade-in-down`}>
             <Sparkles size={14} strokeWidth={1.5} />
             <span>Handcrafted in India</span>
           </div>
-          <h1 className={styles.heroTitle}>
+          <h1 className={`${styles.heroTitle} animate-fade-in-up delay-1`}>
             Handmade with love,
             <br />
             rooted in tradition.
           </h1>
-          <p className={styles.heroSub}>
+          <p className={`${styles.heroSub} animate-fade-in-up delay-2`}>
             Each piece tells a story — crafted by artisan hands using techniques
             passed down through generations. Discover pottery, textiles,
             woodwork and more.
           </p>
-          <div className={styles.heroCtas}>
+          <div className={`${styles.heroCtas} animate-fade-in-up delay-3`}>
             <Link href="/products" className="btn-primary">
               <ShoppingBag size={18} strokeWidth={1.5} />
               Shop now
@@ -156,24 +156,24 @@ export default async function Home() {
       {/* ========================================
           2. TRUST BAR — Quick stats
           ======================================== */}
-      <section className={styles.trustBar}>
+      <section className={`${styles.trustBar} animate-fade-in`}>
         <div className={styles.trustBarInner}>
-          <div className={styles.trustItem}>
+          <div className={`${styles.trustItem} animate-fade-in-up delay-1`}>
             <HandMetal size={22} strokeWidth={1.5} />
             <span>100% Handmade</span>
           </div>
           <div className={styles.trustDivider} />
-          <div className={styles.trustItem}>
+          <div className={`${styles.trustItem} animate-fade-in-up delay-2`}>
             <Users size={22} strokeWidth={1.5} />
             <span>500+ Artisans</span>
           </div>
           <div className={styles.trustDivider} />
-          <div className={styles.trustItem}>
+          <div className={`${styles.trustItem} animate-fade-in-up delay-3`}>
             <Truck size={22} strokeWidth={1.5} />
             <span>Ships Across India</span>
           </div>
           <div className={styles.trustDivider} />
-          <div className={styles.trustItem}>
+          <div className={`${styles.trustItem} animate-fade-in-up delay-4`}>
             <RotateCcw size={22} strokeWidth={1.5} />
             <span>Free Returns</span>
           </div>
@@ -185,15 +185,15 @@ export default async function Home() {
       {/* ========================================
           3. SHOP BY CATEGORY — Visual tiles
           ======================================== */}
-      <section className={styles.sectionAlt}>
+      <section className={`${styles.sectionAlt} animate-fade-in`}>
         <div className="pattern-warli" />
         <div className="container" style={{ position: "relative", zIndex: 2 }}>
-          <h2 className="section-title">Shop by Category</h2>
-          <p className="section-subtitle">
+          <h2 className={`section-title animate-fade-in-down`}>Shop by Category</h2>
+          <p className={`section-subtitle animate-fade-in-up delay-1`}>
             Explore our curated collections of authentic Indian handicrafts,
             each made by skilled artisans.
           </p>
-          <div className={styles.categoryGrid}>
+          <div className={`${styles.categoryGrid} animate-fade-in-up delay-2`}>
             {categories.map((cat) => (
               <Link
                 href={`/products?category=${cat.id}`}
