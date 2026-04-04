@@ -3,14 +3,14 @@
 # Integrated build & runtime for Render
 # ============================================
 
-FROM node:20-alpine AS base
+FROM node:22-alpine AS base
 RUN apk add --no-cache nginx supervisor envsubst
 
 # ── API Builder ───────────────────────────────
 FROM base AS api-build
 WORKDIR /build/api
 COPY api/package*.json ./
-RUN npm i
+RUN npm i --legacy-peer-deps
 COPY api/ .
 RUN npx prisma generate
 RUN npm run build
@@ -24,7 +24,7 @@ ARG NEXT_PUBLIC_API_URL
 ARG NEXT_PUBLIC_RAZORPAY_KEY_ID
 
 COPY web/package*.json ./
-RUN npm i
+RUN npm i --legacy-peer-deps
 COPY web/ .
 
 # Bake public variables in for the build process (Next.js needs them now)
@@ -40,7 +40,7 @@ WORKDIR /build/admin
 ARG NEXT_PUBLIC_API_BASE_URL
 
 COPY admin/package*.json ./
-RUN npm i
+RUN npm i --legacy-peer-deps
 COPY admin/ .
 
 ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
