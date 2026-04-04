@@ -1,0 +1,206 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(CUSTOMER)
+
+  orders    Order[]
+  cart      Cart?
+  addresses Address[]
+  reviews   Review[]
+  wishlistItems WishlistItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Address {
+  id        String  @id @default(uuid())
+  userId    String
+
+  fullName  String
+  phone     String
+  line1     String
+  line2     String?
+  city      String
+  state     String
+  postalCode String
+  country   String
+
+  user      User @relation(fields: [userId], references: [id])
+}
+model Category {
+  id        String    @id @default(uuid())
+  name      String
+  slug      String    @unique
+  products  Product[]
+}
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  description String
+
+  price       Float
+  stock       Int
+
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  images      ProductImage[]
+  reviews     Review[]
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+  wishlistItems WishlistItem[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProductImage {
+  id        String  @id @default(uuid())
+  url       String
+  productId String
+
+  product   Product @relation(fields: [productId], references: [id])
+}
+model Cart {
+  id        String     @id @default(uuid())
+  userId    String     @unique
+
+  user      User       @relation(fields: [userId], references: [id])
+  items     CartItem[]
+}
+model CartItem {
+  id        String  @id @default(uuid())
+  cartId    String
+  productId String
+  quantity  Int
+
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+}
+model Order {
+  id          String      @id @default(uuid())
+  userId      String
+
+  totalAmount Float
+  status      OrderStatus
+  paymentStatus PaymentStatus
+
+  shippingName       String?
+  shippingPhone      String?
+  shippingLine1      String?
+  shippingLine2      String?
+  shippingCity       String?
+  shippingState      String?
+  shippingPostalCode String?
+  shippingCountry    String?
+
+  items       OrderItem[]
+  payment     Payment?
+  shipment    Shipment?
+
+  user        User        @relation(fields: [userId], references: [id])
+
+  createdAt   DateTime @default(now())
+}
+enum OrderStatus {
+  PLACED
+  CONFIRMED
+  PACKED
+  SHIPPED
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String
+  productId String
+
+  quantity  Int
+  price     Float
+
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Payment {
+  id        String  @id @default(uuid())
+  orderId   String  @unique
+
+  provider  String
+  amount    Float
+  status    PaymentStatus
+
+  transactionId String?
+
+  order     Order   @relation(fields: [orderId], references: [id])
+}
+
+model Shipment {
+  id           String @id @default(uuid())
+  orderId      String @unique
+
+  courier      String
+  trackingId   String
+  status       String
+
+  order        Order  @relation(fields: [orderId], references: [id])
+}
+model Review {
+  id        String  @id @default(uuid())
+  userId    String
+  productId String
+
+  rating    Int
+  comment   String?
+
+  user      User    @relation(fields: [userId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Coupon {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  discount    Float
+  expiryDate  DateTime
+}
+
+model WishlistItem {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}

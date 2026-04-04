@@ -1,0 +1,238 @@
+/* ===================================================
+   Inner Pages (Products, Cart, etc.) — Pottery-Studio Theme
+   =================================================== */
+
+/* Page Header */
+.pageHeader {
+  position: relative;
+  background-color: var(--bg-dark);
+  color: var(--cream);
+  padding: 6rem 2rem 4rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.pageTitle {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: var(--sp-sm);
+  color: var(--cream);
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-heading), 'Cormorant Garamond', Georgia, serif;
+}
+
+.pageSubtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Page Layout */
+.pageContent {
+  padding: var(--sp-xl) 0;
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  background-color: var(--bg-primary);
+  flex: 1;
+}
+
+.pageContent > :not(.pattern2-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+.twoColumn {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--sp-lg);
+}
+
+@media (max-width: 900px) {
+  .twoColumn {
+    grid-template-columns: 1fr;
+  }
+}
+
+.threeColumn {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--sp-lg);
+}
+
+@media (max-width: 900px) {
+  .threeColumn {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* UI Elements */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-md);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.cardTitle {
+  font-family: var(--font-heading), 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin-bottom: var(--sp-sm);
+  border-bottom: 1.5px solid var(--linen);
+  padding-bottom: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--sp-md);
+}
+
+.productCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-xs);
+  text-align: center;
+  transition: box-shadow var(--duration-slow) var(--ease-craft),
+    transform var(--duration-slow) var(--ease-craft);
+}
+
+.productCard:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+.productImage {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: var(--linen);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--sp-sm);
+  object-fit: cover;
+}
+
+.productName {
+  font-family: var(--font-heading), 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  color: var(--text-primary);
+}
+
+.productPrice {
+  color: var(--terracotta);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: var(--sp-sm);
+  font-family: var(--font-body), 'Inter', sans-serif;
+}
+
+/* Cart & Forms */
+.formGroup {
+  margin-bottom: var(--sp-md);
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-size: 0.9rem;
+  background-color: var(--cream);
+  color: var(--text-primary);
+  transition: border-color var(--duration-fast);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--terracotta);
+}
+
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--linen);
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--terracotta);
+}
+
+/* ===== Entrance Animations ===== */
+.pageHeader {
+  animation: fadeIn 0.5s var(--ease-craft) both;
+}
+
+.pageTitle {
+  animation: fadeInDown 0.6s var(--ease-craft) both;
+}
+
+.pageSubtitle {
+  animation: fadeInUp 0.6s var(--ease-craft) 0.15s both;
+}
+
+.pageContent {
+  animation: fadeIn 0.5s var(--ease-craft) 0.2s both;
+}
+
+.card {
+  animation: fadeInUp 0.5s var(--ease-craft) both;
+  transition: box-shadow var(--duration-slow) var(--ease-craft),
+    transform var(--duration-slow) var(--ease-craft);
+}
+
+.productCard {
+  animation: fadeInUp 0.5s var(--ease-craft) both;
+}
+
+.productCard:nth-child(1) { animation-delay: 0.05s; }
+.productCard:nth-child(2) { animation-delay: 0.1s; }
+.productCard:nth-child(3) { animation-delay: 0.15s; }
+.productCard:nth-child(4) { animation-delay: 0.2s; }
+.productCard:nth-child(5) { animation-delay: 0.25s; }
+.productCard:nth-child(6) { animation-delay: 0.3s; }
+.productCard:nth-child(7) { animation-delay: 0.35s; }
+.productCard:nth-child(8) { animation-delay: 0.4s; }
+
+/* ===== Enhanced Input ===== */
+.input {
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.input:focus {
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(124, 61, 30, 0.08);
+}
+

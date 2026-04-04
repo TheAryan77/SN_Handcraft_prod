@@ -1,0 +1,156 @@
+/* ===================================================
+   Footer — Dark Roast with Diagonal Weave
+   =================================================== */
+
+.footer {
+  position: relative;
+  background-color: var(--bg-dark);
+  color: var(--linen);
+  padding: var(--sp-xl) var(--sp-md) 0;
+  margin-top: auto;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: var(--sp-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Brand */
+.brand {
+  min-width: 200px;
+}
+
+.brand h2 {
+  font-family: var(--font-heading), 'Cormorant Garamond', Georgia, serif;
+  color: var(--cream);
+  font-size: 1.5rem;
+  margin-bottom: var(--sp-sm);
+}
+
+.brandAccent {
+  color: var(--wheat-gold);
+}
+
+.brand p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 0.85rem;
+  margin-bottom: var(--sp-sm);
+}
+
+.socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.socials a {
+  color: var(--linen);
+  padding: 0.45rem;
+  border: 1px solid rgba(232, 221, 208, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--duration-normal) var(--ease-craft);
+}
+
+.socials a:hover {
+  color: var(--cream);
+  border-color: var(--wheat-gold);
+  background: rgba(212, 169, 106, 0.15);
+}
+
+/* Link columns */
+.linkCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.linkCol h3 {
+  color: var(--cream);
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.linkItem {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  transition: color var(--duration-fast);
+}
+
+.linkItem:hover {
+  color: var(--wheat-gold);
+}
+
+/* Bottom bar */
+.bottom {
+  position: relative;
+  z-index: 2;
+  margin-top: var(--sp-lg);
+  padding: var(--sp-md) 0;
+  border-top: 1px solid rgba(232, 221, 208, 0.1);
+}
+
+.bottomInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+}
+
+.bottom p {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.paymentLogos {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.payBadge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: rgba(232, 221, 208, 0.08);
+  border: 1px solid rgba(232, 221, 208, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.6rem;
+  font-family: var(--font-body), 'Inter', sans-serif;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-md);
+  }
+
+  .brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}

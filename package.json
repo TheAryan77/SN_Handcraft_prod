@@ -1,0 +1,13 @@
+{
+  "name": "sn-handcrafts",
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "npm --prefix api install --legacy-peer-deps && npm --prefix web install --legacy-peer-deps && npm --prefix admin install --legacy-peer-deps",
+    "dev": "npx concurrently \"npm run dev --prefix api\" \"npm run dev --prefix admin\" \"npm run dev --prefix web\"",
+    "build": "npm run build --prefix api && npm run build --prefix web && npm run build --prefix admin",
+    "start": "npx concurrently \"npm start --prefix api\" \"npm start --prefix admin\" \"npm start --prefix web\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

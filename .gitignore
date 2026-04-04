@@ -1,0 +1,59 @@
+# ===================================
+# SN HandCrafts — Root .gitignore
+# ===================================
+
+# ── Dependencies ──────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ── Environment variables ─────────────
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+# Keep example env files
+!.env.example
+
+# ── Next.js builds ────────────────────
+.next/
+out/
+
+# ── API builds ────────────────────────
+api/dist/
+
+# ── Logs ──────────────────────────────
+api/logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Uploads (user-generated) ──────────
+api/public/uploads/
+
+# ── OS / Editor files ────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# ── TypeScript cache ──────────────────
+*.tsbuildinfo
+
+# ── Testing ───────────────────────────
+coverage/
+
+# ── Docker ────────────────────────────
+# Keep docker-compose & Dockerfiles
+# Ignore runtime volumes
+docker-data/
+
+# ── Misc ──────────────────────────────
+.vercel
+.turbo

@@ -1,0 +1,318 @@
+/* ===================================================
+   Navbar — Dark Earthy Style
+   =================================================== */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg-dark);
+  transition: box-shadow var(--duration-normal) var(--ease-craft),
+    background-color var(--duration-normal) var(--ease-craft);
+}
+
+.navScrolled {
+  box-shadow: 0 4px 20px rgba(44, 26, 14, 0.25);
+}
+
+.navInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+}
+
+/* Brand */
+.brand {
+  font-family: var(--font-heading), 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: -0.01em;
+}
+
+.brand a {
+  color: var(--cream);
+}
+
+.brand a:hover {
+  color: var(--cream);
+}
+
+.brandAccent {
+  color: var(--wheat-gold);
+}
+
+/* Nav links */
+.links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.link {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--linen);
+  position: relative;
+  letter-spacing: 0.02em;
+  padding: 0.25rem 0;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1.5px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--wheat-gold);
+  transition: width var(--duration-normal) var(--ease-craft);
+}
+
+.link:hover {
+  color: var(--cream);
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+/* Icons */
+.icons {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.iconBtn {
+  color: var(--linen);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--duration-fast) var(--ease-craft);
+}
+
+.iconBtn:hover {
+  background-color: rgba(232, 221, 208, 0.1);
+  color: var(--cream);
+}
+
+/* Cart button with label */
+.cartBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--bg-dark);
+  background-color: var(--terracotta);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-xl);
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all var(--duration-normal) var(--ease-craft);
+}
+
+.cartBtn:hover {
+  background-color: var(--rust-accent);
+  color: var(--cream);
+  transform: translateY(-1px);
+}
+
+.cartLabel {
+  color: var(--cream);
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Search */
+.searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background-color: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 0.5rem;
+  z-index: 110;
+  min-width: 300px;
+  animation: fadeInDown 0.2s var(--ease-craft);
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--linen);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  background-color: transparent;
+  outline: none;
+  transition: border-color var(--duration-fast);
+}
+
+.searchInput:focus {
+  border-color: var(--terracotta);
+}
+
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+/* Profile / Dropdown */
+.profileContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background-color: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  padding: 0.4rem 0;
+  z-index: 110;
+  animation: fadeInDown 0.2s var(--ease-craft);
+}
+
+.dropdownHeader {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--linen);
+}
+
+.dropdownName {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.dropdownEmail {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.dropdownItem {
+  padding: 0.65rem 1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: background-color var(--duration-fast), color var(--duration-fast);
+}
+
+.dropdownItem:hover {
+  background-color: var(--linen);
+  color: var(--action-primary);
+}
+
+.dropdownDivider {
+  height: 1px;
+  background-color: var(--linen);
+  margin: 0.3rem 0;
+}
+
+/* Mobile menu button */
+.mobileMenuBtn {
+  display: none;
+  color: var(--cream);
+  padding: 0.5rem;
+}
+
+.mobileOverlay {
+  display: none;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .mobileMenuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--bg-dark);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5rem 2rem 2rem;
+    gap: 1.5rem;
+    transform: translateX(-100%);
+    transition: transform var(--duration-normal) var(--ease-craft);
+    z-index: 200;
+    box-shadow: var(--shadow-xl);
+  }
+
+  .linksOpen {
+    transform: translateX(0);
+  }
+
+  .link {
+    font-size: 1rem;
+  }
+
+  .mobileOverlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 26, 14, 0.5);
+    z-index: 199;
+  }
+
+  .cartLabel {
+    display: none;
+  }
+
+  .cartBtn {
+    padding: 0.5rem;
+    border-radius: 50%;
+    background-color: transparent;
+  }
+  .cartBtn:hover {
+    background-color: rgba(232, 221, 208, 0.1);
+  }
+
+  .searchDropdown {
+    min-width: 240px;
+    right: -50px;
+  }
+}

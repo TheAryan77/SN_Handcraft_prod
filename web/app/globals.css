@@ -1,0 +1,569 @@
+/* ===================================================
+   SN Handcrafts — Pottery-Studio Design System
+   =================================================== */
+
+:root {
+  /* Core Palette — Pottery Studio */
+  --cream: #fdf8f2;
+  --linen: #e8ddd0;
+  --terracotta: #7c3d1e;
+  --dark-roast: #2c1a0e;
+  --forest: #3d6b4f;
+  --burnt-sienna: #b06a3a;
+  --wheat-gold: #d4a96a;
+  --rust-accent: #c4541a;
+  --moss: #dde8dd;
+  --lavender: #ede8f5;
+
+  /* Semantic aliases */
+  --bg-primary: var(--cream);
+  --bg-alt: var(--linen);
+  --bg-dark: var(--dark-roast);
+  --text-primary: var(--dark-roast);
+  --text-secondary: #5c4033;
+  --text-muted: #8b7355;
+  --text-on-dark: var(--cream);
+  --action-primary: var(--terracotta);
+  --action-hover: #5e2e16;
+  --accent: var(--wheat-gold);
+  --accent-green: var(--forest);
+
+  /* Surface */
+  --surface: #ffffff;
+  --border: #ddd2c4;
+  --overlay: rgba(44, 26, 14, 0.35);
+
+  /* Spacing */
+  --sp-xs: 0.5rem;
+  --sp-sm: 1rem;
+  --sp-md: 1.5rem;
+  --sp-lg: 3rem;
+  --sp-xl: 5rem;
+  --sp-2xl: 7rem;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(44, 26, 14, 0.08);
+  --shadow-md: 0 4px 16px rgba(44, 26, 14, 0.1);
+  --shadow-lg: 0 8px 32px rgba(44, 26, 14, 0.14);
+  --shadow-xl: 0 16px 48px rgba(44, 26, 14, 0.18);
+
+  /* Transitions */
+  --ease-craft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --duration-slow: 0.4s;
+  --duration-normal: 0.3s;
+  --duration-fast: 0.2s;
+
+  /* ===== Backward-compatible aliases for existing pages ===== */
+  --primary-color: var(--terracotta);
+  --accent-color: var(--wheat-gold);
+  --background-color: var(--cream);
+  --text-dark: var(--dark-roast);
+  --text-light: var(--text-muted);
+  --white: #ffffff;
+  --surface-color: var(--surface);
+  --border-color: var(--border);
+  --spacing-xs: var(--sp-xs);
+  --spacing-sm: var(--sp-sm);
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 6rem;
+}
+
+/* ===== Base Reset ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Typography ===== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 3.25rem); }
+h2 { font-size: clamp(1.75rem, 3.5vw, 2rem); letter-spacing: -0.01em; }
+h3 { font-size: 1.15rem; }
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--duration-normal) var(--ease-craft);
+}
+
+a:hover {
+  color: var(--action-primary);
+}
+
+ul { list-style: none; }
+
+button {
+  font-family: var(--font-body), 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all var(--duration-normal) var(--ease-craft);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== Utility: Container ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--sp-md);
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+  background-color: var(--action-primary);
+  color: var(--cream);
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 0.875rem;
+  font-family: var(--font-body), 'Inter', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  letter-spacing: 0.02em;
+  transition: all var(--duration-slow) var(--ease-craft);
+  border: 1px solid var(--action-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--action-hover);
+  border-color: var(--action-hover);
+  color: var(--cream);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--action-primary);
+  border: 1.5px solid var(--action-primary);
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 0.875rem;
+  font-family: var(--font-body), 'Inter', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  letter-spacing: 0.02em;
+  transition: all var(--duration-slow) var(--ease-craft);
+}
+
+.btn-secondary:hover {
+  background-color: var(--action-primary);
+  color: var(--cream);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ===== Section Title ===== */
+.section-title {
+  text-align: center;
+  font-size: clamp(1.75rem, 3.5vw, 2rem);
+  margin: 0 auto var(--sp-sm);
+  position: relative;
+  width: fit-content;
+  color: var(--text-primary);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 540px;
+  margin: 0 auto var(--sp-lg);
+  line-height: 1.7;
+}
+
+/* ===== Wavy Divider ===== */
+.wavy-divider {
+  width: 100%;
+  height: 24px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wavy-divider svg {
+  display: block;
+  width: 100%;
+  height: 24px;
+}
+
+/* ===== SVG Pattern Backgrounds (4-10% opacity) ===== */
+
+/* Block Print Dots — hero / newsletter overlay */
+.pattern-blockprint {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='3' fill='%232c1a0e'/%3E%3Ccircle cx='30' cy='10' r='2' fill='%232c1a0e'/%3E%3Ccircle cx='10' cy='30' r='2' fill='%232c1a0e'/%3E%3Ccircle cx='30' cy='30' r='3' fill='%232c1a0e'/%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%232c1a0e'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 40px 40px;
+}
+
+/* Diagonal Weave — footer / dark sections */
+.pattern-weave {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L40 40M-10 30L30 -10M10 50L50 10' stroke='%23e8ddd0' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 40px 40px;
+}
+
+/* Honeycomb Rings — "Our story" section */
+.pattern-honeycomb {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg width='56' height='48' viewBox='0 0 56 48' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='14' cy='14' r='10' fill='none' stroke='%232c1a0e' stroke-width='1'/%3E%3Ccircle cx='42' cy='14' r='10' fill='none' stroke='%232c1a0e' stroke-width='1'/%3E%3Ccircle cx='28' cy='38' r='10' fill='none' stroke='%232c1a0e' stroke-width='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 56px 48px;
+}
+
+/* Warli-style Stars — headings / product watermarks */
+.pattern-warli {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='30,5 35,20 50,20 38,30 42,45 30,35 18,45 22,30 10,20 25,20' fill='none' stroke='%232c1a0e' stroke-width='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 60px 60px;
+}
+
+/* ===== Legacy compatibility (keep mandala-bg and pattern2-bg for existing pages) ===== */
+.mandala-bg {
+  background-image: url('/mandala.jpg');
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+.pattern2-bg {
+  background-image: url('/pattern2.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.32;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--linen);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ===== Selection ===== */
+::selection {
+  background: var(--wheat-gold);
+  color: var(--dark-roast);
+}
+
+/* ===== Animation Keyframes ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+@keyframes bounceIn {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes progressBar {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* ===== Page Transition Utilities ===== */
+.animate-fade-in { animation: fadeIn 0.5s var(--ease-craft) both; }
+.animate-fade-in-up { animation: fadeInUp 0.6s var(--ease-craft) both; }
+.animate-fade-in-down { animation: fadeInDown 0.5s var(--ease-craft) both; }
+.animate-slide-left { animation: slideInLeft 0.5s var(--ease-craft) both; }
+.animate-slide-right { animation: slideInRight 0.5s var(--ease-craft) both; }
+.animate-scale-in { animation: scaleIn 0.4s var(--ease-craft) both; }
+.animate-bounce-in { animation: bounceIn 0.6s var(--ease-craft) both; }
+
+/* Stagger delays */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+/* ===== Spinner / Loader ===== */
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid var(--linen);
+  border-top-color: var(--terracotta);
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+  display: inline-block;
+}
+
+.spinner-sm {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.spinner-lg {
+  width: 36px;
+  height: 36px;
+  border-width: 3px;
+}
+
+.spinner-white {
+  border-color: rgba(255,255,255,0.3);
+  border-top-color: #fff;
+}
+
+/* Full-page loader overlay */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(253, 248, 242, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ===== Skeleton Loader ===== */
+.skeleton {
+  background: linear-gradient(90deg, var(--linen) 25%, #ede5d8 50%, var(--linen) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease infinite;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-text {
+  height: 14px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  height: 22px;
+  width: 60%;
+  margin-bottom: 12px;
+}
+
+.skeleton-card {
+  height: 200px;
+  border-radius: var(--radius-md);
+}
+
+/* ===== Error shake ===== */
+.shake { animation: shake 0.4s ease; }
+
+/* ===== Toast / Notice ===== */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  background: var(--dark-roast);
+  color: var(--cream);
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-xl);
+  z-index: 10000;
+  animation: fadeInUp 0.35s var(--ease-craft) both;
+  max-width: 360px;
+}
+
+.toast-success { border-left: 4px solid var(--forest); }
+.toast-error { border-left: 4px solid var(--rust-accent); }
+
+/* ===== Modern Input Focus Ring ===== */
+.input-modern {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-size: 0.9rem;
+  background-color: var(--surface);
+  color: var(--text-primary);
+  transition: all var(--duration-normal) var(--ease-craft);
+  outline: none;
+}
+
+.input-modern:focus {
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(124, 61, 30, 0.1);
+}
+
+.input-modern::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+/* ===== Modern Card Hover ===== */
+.card-hover {
+  transition: all var(--duration-slow) var(--ease-craft);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== Glassmorphism Card ===== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* ===== Progress Bar ===== */
+.progress-bar {
+  height: 3px;
+  background: var(--linen);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--terracotta), var(--wheat-gold));
+  animation: progressBar 1.5s ease infinite;
+}
+
+/* ===== Disabled Button ===== */
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
