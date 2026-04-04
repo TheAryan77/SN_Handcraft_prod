@@ -10,7 +10,7 @@ RUN apk add --no-cache nginx supervisor envsubst
 FROM base AS api-build
 WORKDIR /build/api
 COPY api/package*.json ./
-RUN npm ci
+RUN npm i
 COPY api/ .
 RUN npx prisma generate
 RUN npm run build
@@ -24,7 +24,7 @@ ARG NEXT_PUBLIC_API_URL
 ARG NEXT_PUBLIC_RAZORPAY_KEY_ID
 
 COPY web/package*.json ./
-RUN npm ci
+RUN npm i
 COPY web/ .
 
 # Bake public variables in for the build process (Next.js needs them now)
@@ -40,7 +40,7 @@ WORKDIR /build/admin
 ARG NEXT_PUBLIC_API_BASE_URL
 
 COPY admin/package*.json ./
-RUN npm ci
+RUN npm i
 COPY admin/ .
 
 ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
