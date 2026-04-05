@@ -14,7 +14,7 @@ export default async function WishlistPage() {
 
   let items: any[] = [];
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
     // Assuming wishlist API exists or user endpoint retrieves wishlist
     // Actually, `GET /api/v1/users/me` could return wishlist or `GET /api/v1/wishlist` does
     const res = await fetch(`${apiUrl}/wishlist`, {

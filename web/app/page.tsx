@@ -79,7 +79,7 @@ export default async function Home() {
   let dbCategories: any[] = [];
   let dbProducts: any[] = [];
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
     // Using fetch directly in the server component
     const [catsRes, prodsRes] = await Promise.all([
       fetch(`${apiUrl}/categories`, { next: { revalidate: 60 } }),

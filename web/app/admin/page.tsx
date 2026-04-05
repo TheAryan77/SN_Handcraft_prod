@@ -7,7 +7,7 @@ import { getServerSession } from "@/lib/auth";
 export default async function AdminPage() {
   const session = await getServerSession();
   const token = (session as any)?.accessToken;
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
 
   let categories: any[] = [];
   let products: any[] = [];

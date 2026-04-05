@@ -73,7 +73,7 @@ export default async function ProfilePage({
       return;
     }
     
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api/v1'}/users/me/addresses`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api/v1'}/users/me/addresses`, {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
@@ -95,7 +95,7 @@ export default async function ProfilePage({
 
     const token = (session as any)?.accessToken;
 
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api/v1'}/users/me/addresses/${addressId}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api/v1'}/users/me/addresses/${addressId}`, {
       method: "DELETE",
       headers: { "Authorization": `Bearer ${token}` }
     });
@@ -113,7 +113,7 @@ export default async function ProfilePage({
   let user: any = null;
   try {
     const session = await getServerSession();
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api/v1';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1';
     const res = await fetch(`${apiUrl}/users/me`, {
       method: "GET",
       headers: { "Authorization": `Bearer ${(session as any)?.accessToken}` },

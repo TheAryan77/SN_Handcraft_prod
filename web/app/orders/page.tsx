@@ -18,7 +18,7 @@ export default async function OrdersPage() {
 
   let orders: any[] = [];
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
     const res = await fetch(`${apiUrl}/orders/my`, {
       method: "GET",
       headers: { "Authorization": `Bearer ${(session as any).accessToken}` },

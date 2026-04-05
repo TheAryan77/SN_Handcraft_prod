@@ -22,7 +22,7 @@ export default async function InvoicePage({
   let user: any = null;
   try {
     const token = (session as any)?.accessToken;
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
 
     const [orderRes, userRes] = await Promise.all([
       fetch(`${apiUrl}/orders/${id}`, {

@@ -50,7 +50,7 @@ export default function AuthPage() {
     }
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
       const endpoint = isLogin ? `${apiUrl}/auth/login` : `${apiUrl}/auth/register`;
       const payload = isLogin ? { email, password } : { name, email, password };
 

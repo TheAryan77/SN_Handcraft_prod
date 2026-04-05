@@ -13,7 +13,7 @@ export default async function ProductDetailsPage({
 
   let product: any = null;
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
     // Assuming API accepts ID or slug on this endpoint
     const res = await fetch(`${apiUrl}/products/${id}`, { next: { revalidate: 60 } });
     const data = await res.json();

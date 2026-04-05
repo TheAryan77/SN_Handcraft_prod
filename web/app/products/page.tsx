@@ -5,7 +5,7 @@ export default async function ProductsPage() {
   let products = [];
   
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
     const [catsRes, prodsRes] = await Promise.all([
       fetch(`${apiUrl}/categories`, { next: { revalidate: 60 } }),
       fetch(`${apiUrl}/products`, { next: { revalidate: 60 } })

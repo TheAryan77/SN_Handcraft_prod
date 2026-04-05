@@ -1,6 +1,6 @@
 /** Returns the API base URL for client-side fetch calls */
 export function getApiUrl() {
-  return process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+  return process.env.NEXT_PUBLIC_API_URL || "/api/v1";
 }
 
 /** Reads the accessToken cookie for authenticated client-side requests */

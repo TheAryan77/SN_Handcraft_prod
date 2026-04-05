@@ -15,7 +15,7 @@ export default async function CheckoutPage() {
   let items: any[] = [];
   let addresses: any[] = [];
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
     const token = (session as any).accessToken;
     
     // Fetch cart
