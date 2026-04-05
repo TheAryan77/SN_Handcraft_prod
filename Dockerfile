@@ -134,7 +134,7 @@ envsubst '${NGINX_PORT}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.con
 # In production on Render, these variables are provided by the platform.
 cat <<ENV > /app/api/.env
 NODE_ENV=${NODE_ENV:-production}
-PORT=3000
+PORT=4000
 DATABASE_URL=${DATABASE_URL}
 JWT_SECRET=${JWT_SECRET}
 JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-7d}
@@ -167,6 +167,6 @@ SCRIPT
 RUN chmod +x /app/start.sh
 
 WORKDIR /app
-EXPOSE 80 3000 3001 3002
+EXPOSE 80 4000 3001 3002
 
 CMD ["/app/start.sh"]
