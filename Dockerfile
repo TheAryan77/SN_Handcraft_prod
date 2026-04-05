@@ -134,7 +134,7 @@ envsubst '${NGINX_PORT}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.con
 # In production on Render, these variables are provided by the platform.
 cat <<ENV > /app/api/.env
 NODE_ENV=${NODE_ENV:-production}
-PORT=4000
+API_PORT=4000
 DATABASE_URL=${DATABASE_URL}
 JWT_SECRET=${JWT_SECRET}
 JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-7d}

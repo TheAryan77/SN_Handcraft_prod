@@ -40,7 +40,7 @@ const getOptionalNumberEnv = (name: string): number | undefined => {
 
 export const config = {
     env: getRequiredEnv("NODE_ENV"),
-    port: getRequiredNumberEnv("PORT"),
+    port: getRequiredNumberEnv("API_PORT"),
     jwtSecret: getRequiredEnv("JWT_SECRET"),
     jwtExpiresIn: getRequiredEnv("JWT_EXPIRES_IN"),
     jwtRefreshSecret: getRequiredEnv("JWT_REFRESH_SECRET"),
