@@ -161,6 +161,11 @@ echo "NEXT_PUBLIC_RAZORPAY_KEY_ID=${NEXT_PUBLIC_RAZORPAY_KEY_ID}" >> /app/web/.e
 # --- GENERATE .env FOR ADMIN ---
 echo "NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}" > /app/admin/.env
 
+# --- RUN DATABASE MIGRATIONS ---
+# This ensures your production database (NeonDB) stays in sync with your schema
+echo "Running database migrations..."
+cd /app/api && npx prisma migrate deploy
+
 # Start Supervisor
 exec supervisord -c /etc/supervisord.conf
 SCRIPT
