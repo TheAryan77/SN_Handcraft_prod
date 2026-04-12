@@ -75,11 +75,13 @@ const defaultCategories = [
   { id: "wall-art", name: "Wall Art", image: "/cat-wallart.png" },
 ];
 
+import { getApiUrl } from "@/lib/apiClient";
+
 export default async function Home() {
   let dbCategories: any[] = [];
   let dbProducts: any[] = [];
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
+    const apiUrl = getApiUrl();
     // Using fetch directly in the server component
     const [catsRes, prodsRes] = await Promise.all([
       fetch(`${apiUrl}/categories`, { next: { revalidate: 60 } }),
