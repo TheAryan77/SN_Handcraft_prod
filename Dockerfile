@@ -164,6 +164,7 @@ echo "NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}" > /app/admin/.env
 # --- RUN DATABASE MIGRATIONS ---
 # This ensures your production database (NeonDB) stays in sync with your schema
 echo "Running database migrations..."
+export DATABASE_URL="${DATABASE_URL}"
 cd /app/api && npx prisma migrate deploy
 
 # Start Supervisor
