@@ -1,16 +1,13 @@
 /**
- * Unified API URL utility
- * - Server-side: Calls the internal loopback (port 4000)
- * - Browser: Calls the relative path (/api/v1)
+ * Unified API URL utility for separate service deployment
+ *
+ * - When Next.js rewrites are configured: returns relative "/api/v1" 
+ *   (Next.js proxies the request → no CORS issues)
+ * - When rewrites are NOT configured: returns NEXT_PUBLIC_API_URL directly
  */
 export function getApiUrl() {
-  if (typeof window === "undefined") {
-    // SERVER-SIDE: Always call the local container port directly
-    return "http://127.0.0.1:4000/api/v1";
-  }
-  
-  // CLIENT-SIDE: Use the relative path provided by the proxy (Nginx)
-  return "/api/v1";
+  // Use the public env var. Falls back to relative path if not set.
+  return process.env.NEXT_PUBLIC_API_URL || "/api/v1";
 }
 
 /** Utility to get shared accessToken from cookies */

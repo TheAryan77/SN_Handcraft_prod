@@ -1,0 +1,78 @@
+# ============================================
+# SN HandCrafts — Render Blueprint
+# Deploy 3 separate services from one repo
+# ============================================
+# Usage: Connect this repo to Render and it will
+# auto-discover this file and create all services.
+
+services:
+  # ── API Service ──────────────────────────────
+  - type: web
+    name: sn-api
+    runtime: node
+    rootDir: api
+    buildCommand: npm install --legacy-peer-deps && npx prisma generate && npm run build
+    startCommand: npx prisma migrate deploy && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: API_PORT
+        value: "4000"
+      - key: DATABASE_URL
+        sync: false  # Set manually in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: "7d"
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_EXPIRES_IN
+        value: "30d"
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: IMAGEKIT_URL_ENDPOINT
+        sync: false
+      - key: IMAGEKIT_PUBLIC_KEY
+        sync: false
+      - key: IMAGEKIT_PRIVATE_KEY
+        sync: false
+      - key: IMAGEKIT_BASE_FOLDER
+        value: sn-handcrafts
+      - key: SHIPROCKET_EMAIL
+        sync: false
+      - key: SHIPROCKET_PASSWORD
+        sync: false
+      - key: SHIPROCKET_BASE_URL
+        value: https://apiv2.shiprocket.in/v1/external
+      - key: ALLOWED_ORIGINS
+        sync: false  # Set to: https://sn-web.onrender.com,https://sn-admin.onrender.com
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "900000"
+      - key: RATE_LIMIT_MAX
+        value: "100"
+
+  # ── Web Frontend ─────────────────────────────
+  - type: web
+    name: sn-web
+    runtime: node
+    rootDir: web
+    buildCommand: npm install --legacy-peer-deps && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        sync: false  # Set to: https://sn-api.onrender.com/api/v1
+      - key: NEXT_PUBLIC_RAZORPAY_KEY_ID
+        sync: false
+
+  # ── Admin Panel ──────────────────────────────
+  - type: web
+    name: sn-admin
+    runtime: node
+    rootDir: admin
+    buildCommand: npm install --legacy-peer-deps && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_BASE_URL
+        sync: false  # Set to: https://sn-api.onrender.com/api/v1
