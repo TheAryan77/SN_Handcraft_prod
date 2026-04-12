@@ -10,7 +10,7 @@ export function getApiUrl() {
   }
   
   // CLIENT-SIDE: Use the relative path provided by the proxy (Nginx)
-  return process.env.NEXT_PUBLIC_API_URL || "/api/v1";
+  return "/api/v1";
 }
 
 /** Utility to get shared accessToken from cookies */
@@ -18,4 +18,10 @@ export function getAccessToken() {
   if (typeof document === "undefined") return null;
   const match = document.cookie.match(/(^| )accessToken=([^;]+)/);
   return match ? match[2] : null;
+}
+
+/** Returns authentication headers for client-side fetch/axios calls */
+export function authHeaders() {
+  const token = getAccessToken();
+  return token ? { 'Authorization': `Bearer ${token}` } : {};
 }
